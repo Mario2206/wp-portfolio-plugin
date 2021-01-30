@@ -1,0 +1,39 @@
+
+.p-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.p-main-title {
+    text-align: center;
+    padding: 30px 0 ;
+}
+.p-sub-title {
+    text-align: center;
+    padding: 20px 0;
+}
+.p-author-label,.p-theme-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 0;
+}
+.p-author-label label,.p-theme-label label {
+    padding: 8px 0;
+    font-weight: bold;
+}
+.p-theme-label {
+    display: flex;
+    flex-direction: column;
+}
+.p-theme-label input {
+    /*width: 100%;*/
+    width: 5vw;
+    height: 5vw;
+    border: none;
+    border-radius: 100px;
+}
+
+.p-container .submit {
+    text-align: center;
+}
