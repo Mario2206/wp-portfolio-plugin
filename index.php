@@ -22,7 +22,7 @@ require_once(plugin_dir_path( __FILE__ ).'inc/StylesheetGenerator.php');
  * Generate CSS static file
  */
 
-function portfolio_generate_css_file () {
+function portfolio_generate_css_file ($arg) {
     $dbLinker = new \PortfolioPlugin\DBLinker(P_AUTHOR_DATA, P_THEME_DATA);
     $dbLinker->updateThemeData();
     \PortfolioPlugin\StylesheetGenerator::generateStaticFile($dbLinker->getThemeData());
@@ -76,4 +76,4 @@ function my_port_config_menu() {
 add_action('admin_menu', 'my_port_config_menu' );
 add_action('admin_enqueue_scripts', 'portfolio_config_scripts');
 add_action('admin_init', 'portfolio_register_stettings');
-add_action('admin_init', 'portfolio_generate_css_file');//TODO: ATTACH TO OTHER HOOK
+add_action('updated_option', 'portfolio_generate_css_file');
