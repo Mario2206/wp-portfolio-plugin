@@ -29,6 +29,14 @@ const P_AUTHOR_DATA = [
         "placeholder" => "Métier",
         "type" => "text",
         "class" => "p-author-label"
+    ],
+    "p_author_img" => [
+        "value"=> "",
+        "label" => "Portrait",
+        "placeholder" => "Upload",
+        "type" => "file",
+        "class" => "p-author-label",
+        "id" => "upload_portrait"
     ]
 ];
 

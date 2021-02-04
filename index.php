@@ -22,7 +22,7 @@ require_once(plugin_dir_path( __FILE__ ).'inc/StylesheetGenerator.php');
  * Generate CSS static file
  */
 
-function portfolio_generate_css_file ($arg) {
+function portfolio_generate_css_file () {
     $dbLinker = new \PortfolioPlugin\DBLinker(P_AUTHOR_DATA, P_THEME_DATA);
     $dbLinker->updateThemeData();
     \PortfolioPlugin\StylesheetGenerator::generateStaticFile($dbLinker->getThemeData());
@@ -44,11 +44,21 @@ function portfolio_register_stettings() {
 }
 
 
- /**
-  * load scripts and stylesheets
-  */
+/**
+ * load scripts and stylesheets
+ * @param $hook
+ */
 function portfolio_config_scripts($hook) {
+
+    wp_register_script('upload-portrait', plugins_url('script/upload.js', __FILE__)  , ['jquery','media-upload','thickbox']);
+    wp_enqueue_script('upload-portrait');
     wp_enqueue_style(PLUGIN_SLUG . "-custom-style", plugins_url('style/custom-style.css', __FILE__));
+    wp_enqueue_style("thickbox");
+
+    if ( ! did_action( 'wp_enqueue_media' ) ) {
+        wp_enqueue_media();
+    }
+
     if($hook !== "toplevel_page_" . PLUGIN_SLUG) {
         return;
     }
@@ -74,6 +84,10 @@ function my_port_config_menu() {
  * Add actions
  */
 add_action('admin_menu', 'my_port_config_menu' );
-add_action('admin_enqueue_scripts', 'portfolio_config_scripts');
 add_action('admin_init', 'portfolio_register_stettings');
 add_action('updated_option', 'portfolio_generate_css_file');
+
+if(isset($_GET['page']) && $_GET['page'] == "portfolio_author_data") {
+    add_action('admin_enqueue_scripts', 'portfolio_config_scripts');
+}
+
