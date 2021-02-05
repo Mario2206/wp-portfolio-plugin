@@ -17,6 +17,8 @@ class Form {
      */
     private $themeData;
 
+    private $inputElements = [];
+
     /**
      * Form constructor.
      * @param array $authorData
@@ -25,6 +27,10 @@ class Form {
     public function __construct($authorData = [], $themeData = []) {
         $this->authorData = $authorData;
         $this->themeData = $themeData;
+        $this->inputElements = [
+            "file" => "generateFileInput",
+            "formfield" => "generateFormFieldToken"
+        ];
     }
 
     public function generateAuthorInputs() {
@@ -58,27 +64,13 @@ class Form {
      * @param null | string | number  $value
      * @param null | string $placeholder
      * @param null | string $class
+     * @param null | string $id
      * @return string
      */
     private function generateInput($label, $type, $name, $value = null , $placeholder = null, $class = null, $id = null )  {
 
-        if($type === 'file') {
-            $imageSrc = get_option($name);
-
-            return "
-                <div class='$class'>
-                    <label>$label</label>
-                    <input type='hidden' name='$name' id='$id'/>
-                    <div id='$id-view'>
-                    "
-                    .
-                    ($imageSrc ? "<img src='$imageSrc' />" : "")
-                    .
-                    "
-                    </div>
-                    <button type='button'  id='$id-button'>$placeholder</button>
-                </div>
-            ";
+        if(isset($this->inputElements[$type])) {
+            return call_user_func([$this, $this->inputElements[$type]], ...(func_get_args()));
         }
 
         return  "
@@ -88,5 +80,54 @@ class Form {
             </div>
             
         ";
+    }
+
+    /**
+     * @param $label
+     * @param $type
+     * @param $name
+     * @param null | string | number  $value
+     * @param null | string $placeholder
+     * @param null | string $class
+     * @param null | string $id
+     * @return string
+     */
+    private function generateFileInput($label, $type, $name, $value = null , $placeholder = null, $class = null, $id = null) {
+        $imageSrc = get_option($name);
+
+        return "
+                <div class='$class'>
+                    <label>$label</label>
+                    <input type='hidden' name='$name' id='$id'/>
+                    <div id='$id-view'>
+                    "
+            .
+            ($imageSrc ? "<img src='$imageSrc' />" : "")
+            .
+            "
+                    </div>
+                    <button type='button'  id='$id-button'>$placeholder</button>
+                </div>
+            ";
+    }
+
+    /**
+     * @param $label
+     * @param $type
+     * @param $name
+     * @param null $value
+     * @param null $placeholder
+     * @param null $class
+     * @param null | string $id
+     * @return string
+     */
+    private function generateFormFieldToken($label, $type, $name, $value = null , $placeholder = null, $class = null, $id = null) {
+
+        return "
+            <div class='$class'>
+                <label>$label</label>
+                <form-field-token name='$name' placeholder='$placeholder'></form-field-token>
+            </div>
+    ";
     }
 }

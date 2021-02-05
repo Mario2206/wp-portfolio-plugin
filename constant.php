@@ -30,12 +30,19 @@ const P_AUTHOR_DATA = [
         "type" => "text",
         "class" => "p-author-label"
     ],
+    "p_author_skills" => [
+      "value" => "",
+      "label" => "Compétences",
+      "placeholder" => "compétences",
+      "type" => "formfield",
+        "class" => "p-author-label"
+    ],
     "p_author_img" => [
         "value"=> "",
         "label" => "Portrait",
         "placeholder" => "Upload",
         "type" => "file",
-        "class" => "p-author-label",
+        "class" => "p-author-label p-upload",
         "id" => "upload_portrait"
     ]
 ];

@@ -50,19 +50,20 @@ function portfolio_register_stettings() {
  */
 function portfolio_config_scripts($hook) {
 
-    wp_register_script('upload-portrait', plugins_url('script/upload.js', __FILE__)  , ['jquery','media-upload','thickbox']);
-    wp_enqueue_script('upload-portrait');
+    if($hook !== "toplevel_page_" . PLUGIN_SLUG) {
+        return;
+    }
+
     wp_enqueue_style(PLUGIN_SLUG . "-custom-style", plugins_url('style/custom-style.css', __FILE__));
-    wp_enqueue_style("thickbox");
+    wp_enqueue_style(PLUGIN_SLUG . "-admin-style", plugins_url('style/admin-style.css', __FILE__));
+    wp_enqueue_script(PLUGIN_SLUG . "-admin-webcomponent", plugins_url('script/custom-elements/form-field-token.js', __FILE__));
 
     if ( ! did_action( 'wp_enqueue_media' ) ) {
         wp_enqueue_media();
     }
+    wp_register_script('upload-portrait', plugins_url('script/upload.js', __FILE__)  , ['jquery','media-upload','thickbox']);
+    wp_enqueue_script('upload-portrait');
 
-    if($hook !== "toplevel_page_" . PLUGIN_SLUG) {
-        return;
-    }
-    wp_enqueue_style(PLUGIN_SLUG . "-admin-style", plugins_url('style/admin-style.css', __FILE__));
 
 }
 

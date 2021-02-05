@@ -37,3 +37,9 @@
 .p-container .submit {
     text-align: center;
 }
+.p-upload > div {
+    width: 90%;
+}
+.p-upload img {
+    width: 100%;
+}
