@@ -16,6 +16,11 @@ class FormFieldToken extends HTMLElement {
         this._generateFormFields()
     }
 
+    /**
+     * generate component
+     *
+     * @private
+     */
     _generateFormFields() {
 
         const data = this.getAttribute("data")
@@ -105,7 +110,7 @@ class FormFieldToken extends HTMLElement {
      *
      * manage tokens on input
      *
-     * @param e
+     * @param {InputEvent} e
      * @private
      */
     _manageToken(e) {
@@ -121,6 +126,11 @@ class FormFieldToken extends HTMLElement {
         }
     }
 
+    /**
+     *
+     * @param {string[]} tokens
+     * @private
+     */
     _createInitialTokens(tokens) {
         const tokenElements = tokens.map(token => this._createToken(token))
         tokenElements.forEach(element => this.wrapper.appendChild(element))
@@ -130,7 +140,7 @@ class FormFieldToken extends HTMLElement {
      *
      * create token and its corresponding element
      *
-     * @param value
+     * @param {string} value
      * @private
      */
     _createToken(value) {
@@ -146,7 +156,7 @@ class FormFieldToken extends HTMLElement {
      *
      * remove the token and its corresponding element
      *
-     * @param e
+     * @param {MouseEvent} e
      * @private
      */
     _removeToken(e) {
