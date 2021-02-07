@@ -25,14 +25,5 @@ jQuery(function($){
 
     });
 
-    // on remove button click
-    $('body').on('click', '.misha-rmv', function(e){
-
-        e.preventDefault();
-
-        var button = $(this);
-        button.next().val(''); // emptying the hidden field
-        button.hide().prev().html('Upload image');
-    });
 
 });

@@ -2,7 +2,7 @@
     <h1 class="p-main-title">
         Configuration du portfolio
     </h1>
-    <form action="options.php" method="POST">
+    <form action="options.php" method="POST" id="option-form">
 
             <?php
                 settings_fields( PLUGIN_SLUG );

@@ -98,14 +98,14 @@ class Form {
         return "
                 <div class='$class'>
                     <label>$label</label>
-                    <input type='hidden' name='$name' id='$id'/>
-                    <div id='$id-view'>
+                    <input type='hidden' name='$name' id='$id' value='$imageSrc'/>
+                <div id='$id-view'>
                     "
             .
             ($imageSrc ? "<img src='$imageSrc' />" : "")
             .
             "
-                    </div>
+                </div>
                     <button type='button'  id='$id-button'>$placeholder</button>
                 </div>
             ";
@@ -126,7 +126,7 @@ class Form {
         return "
             <div class='$class'>
                 <label>$label</label>
-                <form-field-token name='$name' placeholder='$placeholder'></form-field-token>
+                <form-field-token name='$name' placeholder='$placeholder' data='$value'></form-field-token>
             </div>
     ";
     }
