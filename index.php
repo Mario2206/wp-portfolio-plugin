@@ -48,13 +48,13 @@ function portfolio_register_stettings() {
  * load scripts and stylesheets
  * @param $hook
  */
-function portfolio_config_scripts($hook) {
+function portfolio_config_scripts_admin($hook) {
+    wp_enqueue_style(PLUGIN_SLUG . "-custom-style", plugins_url('style/custom-style.css', __FILE__));
 
     if($hook !== "toplevel_page_" . PLUGIN_SLUG) {
         return;
     }
 
-    wp_enqueue_style(PLUGIN_SLUG . "-custom-style", plugins_url('style/custom-style.css', __FILE__));
     wp_enqueue_style(PLUGIN_SLUG . "-admin-style", plugins_url('style/admin-style.css', __FILE__));
     wp_enqueue_script(PLUGIN_SLUG . "-admin-webcomponent", plugins_url('script/custom-elements/form-field-token.js', __FILE__));
 
@@ -63,8 +63,10 @@ function portfolio_config_scripts($hook) {
     }
     wp_register_script('upload-portrait', plugins_url('script/upload.js', __FILE__)  , ['jquery','media-upload','thickbox']);
     wp_enqueue_script('upload-portrait');
+}
 
-
+function portfolio_config_script() {
+    wp_enqueue_style(PLUGIN_SLUG . "-custom-style", plugins_url('style/custom-style.css', __FILE__));
 }
 
 /**
@@ -87,8 +89,9 @@ function my_port_config_menu() {
 add_action('admin_menu', 'my_port_config_menu' );
 add_action('admin_init', 'portfolio_register_stettings');
 add_action('updated_option', 'portfolio_generate_css_file');
+add_action('wp_enqueue_scripts', 'portfolio_config_script');
 
 if(isset($_GET['page']) && $_GET['page'] == "portfolio_author_data") {
-    add_action('admin_enqueue_scripts', 'portfolio_config_scripts');
+    add_action('admin_enqueue_scripts', 'portfolio_config_scripts_admin');
 }
 
