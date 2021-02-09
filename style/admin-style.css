@@ -22,6 +22,11 @@
     padding: 8px 0;
     font-weight: bold;
 }
+.p-author-label textarea {
+    resize: none;
+    width: 75%;
+    height: 250px;
+}
 .p-theme-label {
     display: flex;
     flex-direction: column;

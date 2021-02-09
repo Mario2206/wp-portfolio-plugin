@@ -30,6 +30,13 @@ const P_AUTHOR_DATA = [
         "type" => "text",
         "class" => "p-author-label"
     ],
+    "p_author_desc" => [
+        "value" => "",
+        "label" => "Description",
+        "placeholder" => "Description de l'auteur du portfolio",
+        "type" => "textarea",
+        "class" => "p-author-label"
+    ],
     "p_author_skills" => [
       "value" => "",
       "label" => "Compétences",

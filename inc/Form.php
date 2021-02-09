@@ -29,7 +29,8 @@ class Form {
         $this->themeData = $themeData;
         $this->inputElements = [
             "file" => "generateFileInput",
-            "formfield" => "generateFormFieldToken"
+            "formfield" => "generateFormFieldToken",
+            "textarea" => "generateTextArea"
         ];
     }
 
@@ -77,6 +78,16 @@ class Form {
             <div class='$class'>
                 <label>$label</label>
                 <input type='$type' name='$name' placeholder='$placeholder' value='$value' id='$id' />
+            </div>
+            
+        ";
+    }
+
+    private function generateTextArea($label, $type, $name, $value = null , $placeholder = null, $class = null, $id = null) {
+        return  "
+            <div class='$class'>
+                <label>$label</label>
+                <textarea name='$name' placeholder='$placeholder'  id='$id' >$value</textarea>
             </div>
             
         ";
