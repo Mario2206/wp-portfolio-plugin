@@ -10,6 +10,8 @@ class FormFieldToken extends HTMLElement {
         //init values
         this.tokens = []
         this.stringifyTokens = ""
+
+        console.log(this.getAttributeNames())
     }
 
     connectedCallback() {
@@ -22,6 +24,10 @@ class FormFieldToken extends HTMLElement {
      * @private
      */
     _generateFormFields() {
+
+        if(this.shadowRoot.innerHTML) {
+            return
+        }
 
         const data = this.getAttribute("data")
 
