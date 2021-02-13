@@ -10,13 +10,9 @@ class FormFieldToken extends HTMLElement {
         //init values
         this.tokens = []
         this.stringifyTokens = ""
-
-        console.log(this.getAttributeNames())
-    }
-
-    connectedCallback() {
         this._generateFormFields()
     }
+
 
     /**
      * generate component
@@ -30,6 +26,7 @@ class FormFieldToken extends HTMLElement {
         }
 
         const data = this.getAttribute("data")
+
 
         //generate container
 
@@ -58,7 +55,8 @@ class FormFieldToken extends HTMLElement {
 
         this.wrapper = this.container.querySelector(".wrapper")
         if(data) {
-            this.tokens = JSON.parse(data)
+            this.tokens = JSON.parse( JSON.parse(data) )
+            console.dir(this.tokens)
             this._createInitialTokens(this.tokens)
         }
 

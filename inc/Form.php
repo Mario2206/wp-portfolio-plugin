@@ -133,11 +133,11 @@ class Form {
      * @return string
      */
     private function generateFormFieldToken($label, $type, $name, $value = null , $placeholder = null, $class = null, $id = null) {
-
+        var_dump($value);
         return "
             <div class='$class'>
                 <label>$label</label>
-                <form-field-token name='$name' placeholder='$placeholder' data='$value'></form-field-token>
+                <form-field-token name='$name' placeholder='$placeholder' data='".htmlspecialchars(json_encode($value), ENT_QUOTES, 'UTF-8')."'></form-field-token>
             </div>
     ";
     }
