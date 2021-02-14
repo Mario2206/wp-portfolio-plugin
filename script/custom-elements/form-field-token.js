@@ -54,10 +54,12 @@ class FormFieldToken extends HTMLElement {
         //get wrapper ref
 
         this.wrapper = this.container.querySelector(".wrapper")
-        if(data) {
-            this.tokens = JSON.parse( JSON.parse(data) )
-            console.dir(this.tokens)
+        if(data.length > 0) {
+
+            this.tokens = JSON.parse(data)
+
             this._createInitialTokens(this.tokens)
+            this._saveTokens()
         }
 
         //append component in shadowRoot
